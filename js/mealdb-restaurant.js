@@ -67,14 +67,19 @@ const mealDetails = (meal) => {
     // console.log('meal field clicked', meal.strTags);
     detailContainer.innerHTML = '';
     const div = document.createElement('div');
+    div.classList.add('row', 'justify-content-center');
     div.innerHTML = `
-            <div " class="col">
+            <div class="col-lg-4">
                 <div class="card">
+                    <h4 class="text-center text-warning mb-4">Product Details</h4>
                     <img src="${meal.strMealThumb}" class="card-img-top" alt="">
                     <div class="card-body">
                         <h5 class="card-title text-center text-info">${meal.strMeal}</h5>
                         <p class="card-text">${meal.strInstructions.slice(0, 200)}</p>
                     </div>
+                </div>
+                <div class="card-footer text-center">
+                    <button class="btn btn-primary px-5" type="button">Order Now</button>
                 </div>
             </div>
         `;
