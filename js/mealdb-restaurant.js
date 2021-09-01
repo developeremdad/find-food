@@ -2,24 +2,23 @@ const spinner = document.getElementById('spinner-div');
 const searchField = () => {
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
-    loadData(searchText);
-    searchField.value = '';
-    spinner.style.display = 'block';
+    if (searchText === '') {
+        document.getElementById('error-empty').style.display = 'block';
+        return;
+    }
+    else {
+        loadData(searchText);
+        searchField.value = '';
+    }
 }
 
 // get input vlaue and check 
 const loadData = (foodName) => {
-    if (foodName === '') {
-        document.getElementById('error-empty').style.display = 'block';
-        spinner.style.display = 'none';
-        return;
-    }
-    else {
+    spinner.style.display = 'block';
         document.getElementById('error-empty').style.display = 'none';
         fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${foodName}`)
             .then(res => res.json())
             .then(data => displayFood(data.meals))
-    }
 }
 
 // display searching food 
