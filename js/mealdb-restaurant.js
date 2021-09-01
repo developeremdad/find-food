@@ -1,14 +1,18 @@
+const spinner = document.getElementById('spinner-div');
 const searchField = () => {
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
     loadData(searchText);
     searchField.value = '';
+    spinner.style.display = 'block';
 }
 
-
+// get input vlaue and check 
 const loadData = (foodName) => {
-    if (foodName == '') {
+    if (foodName === '') {
         document.getElementById('error-empty').style.display = 'block';
+        spinner.style.display = 'none';
+        return;
     }
     else {
         document.getElementById('error-empty').style.display = 'none';
@@ -18,12 +22,16 @@ const loadData = (foodName) => {
     }
 }
 
+// display searching food 
 const displayFood = (meals) => {
     if (meals == null) {
+        spinner.style.display = 'none';
         document.getElementById('error-msg').style.display = 'block';
+        return;
         // alert('Error found');
     }
     else {
+        spinner.style.display = 'none';
         document.getElementById('error-msg').style.display = 'none';
         const divContainer = document.getElementById('div-container');
         detailContainer.textContent = '';
@@ -53,6 +61,7 @@ const displayFood = (meals) => {
 
 // load meal details data
 const loadDataMeal = async (mealId) => {
+    spinner.style.display = 'block';
     const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`;
     const res = await fetch(url);
     const data = await res.json();
@@ -64,6 +73,7 @@ const loadDataMeal = async (mealId) => {
 
 const detailContainer = document.getElementById('details-container');
 const mealDetails = (meal) => {
+    spinner.style.display = 'none';
     // console.log('meal field clicked', meal.strTags);
     detailContainer.innerHTML = '';
     const div = document.createElement('div');
@@ -71,7 +81,7 @@ const mealDetails = (meal) => {
     div.innerHTML = `
             <div class="col-lg-4">
                 <div class="card">
-                    <h4 class="text-center text-warning mb-4">Product Details</h4>
+                    <h4 class="text-center text-warning mb-4 bg-light p-2">Product Details</h4>
                     <img src="${meal.strMealThumb}" class="card-img-top" alt="">
                     <div class="card-body">
                         <h5 class="card-title text-center text-info">${meal.strMeal}</h5>
