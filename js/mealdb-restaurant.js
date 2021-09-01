@@ -15,10 +15,10 @@ const searchField = () => {
 // get input vlaue and check 
 const loadData = (foodName) => {
     spinner.style.display = 'block';
-        document.getElementById('error-empty').style.display = 'none';
-        fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${foodName}`)
-            .then(res => res.json())
-            .then(data => displayFood(data.meals))
+    document.getElementById('error-empty').style.display = 'none';
+    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${foodName}`)
+        .then(res => res.json())
+        .then(data => displayFood(data.meals))
 }
 
 // display searching food 
